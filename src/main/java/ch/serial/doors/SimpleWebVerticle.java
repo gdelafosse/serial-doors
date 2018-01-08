@@ -29,7 +29,7 @@ public class SimpleWebVerticle extends AbstractVerticle {
 
         router.get("/").handler(this::handleGet);
 
-        vertx.createHttpServer().requestHandler(router::accept).listen(8080, ar -> {
+        vertx.createHttpServer().requestHandler(router::accept).listen(Integer.getInteger("http.port", 8080), System.getProperty("http.address", "0.0.0.0"), ar -> {
             if (ar.succeeded()) {
                 startFuture.complete();
             } else {
